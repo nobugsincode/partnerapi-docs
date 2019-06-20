@@ -1,0 +1,14 @@
+put:
+  tags:
+  - order-delivery-webhooks
+  summary: Driver Location
+  description: ""
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          "$ref": "#/definitions/driver-location"
+  responses:
+    '200':
+      description: OK

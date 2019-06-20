@@ -1,0 +1,7 @@
+type: object
+properties:
+  Message:
+    descritpion: Reason why this order is being cancelled.
+    type: string
+example:
+  Message: 'Customer requested the order to be cancelled'

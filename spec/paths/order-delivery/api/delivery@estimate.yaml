@@ -1,0 +1,33 @@
+get:
+  tags:
+  - order-delivery-api
+  summary: Get delivery estimate
+  parameters:
+    - name: restaurantReference
+      in: query
+      required: true
+      schema:
+        type: string
+    - name: toLat
+      in: query
+      required: false
+      schema:
+        type: string
+    - name: toLon
+      in: query
+      required: false
+      schema:
+        type: string
+    - name: toPostcode
+      in: query
+      required: false
+      schema:
+        type: string
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            "$ref": "#/definitions/estimated-delivery-time"
+  deprecated: true

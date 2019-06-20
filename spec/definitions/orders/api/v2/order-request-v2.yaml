@@ -1,0 +1,41 @@
+type: object
+properties:
+  OrderReference:
+    type: string
+  FriendlyOrderReference:
+    type: string
+  CustomerNotes:
+    type: object
+    properties:
+      NoteForRestaurant: string
+      NoteForDelivery: string
+    additionalProperties:
+      key: string
+    example:
+      NoteForRestaurant: "Make it spicy"
+      NoteForDelivery: "Red door"
+  IsTest:
+    type: boolean
+  TotalPrice:
+    format: double
+    type: integer
+  Restaurant:
+    "$ref": "#/definitions/restaurant-v2"
+  Customer:
+    "$ref": "#/definitions/customer-v2"   
+  Fulfilment:
+    "$ref": "#/definitions/fulfilment-v2"
+  Payment:
+    "$ref": "#/definitions/payment-v2"
+  Items:
+    type: array
+    items: 
+      "$ref": "#/definitions/items-v2"
+required:
+  - OrderReference
+  - TotalPrice
+  - Restaurant
+  - Customer
+  - Fulfilment
+  - Payment
+  - Items

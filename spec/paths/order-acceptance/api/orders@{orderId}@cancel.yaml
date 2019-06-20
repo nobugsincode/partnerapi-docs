@@ -1,0 +1,22 @@
+put:
+  tags:
+  - order-acceptance-api
+  summary: "Cancel order"
+  description: Call when an order has been cancelled by Ops. Cancelling an order overrides any previous accept/reject calls. This should not be used for restaurant rejection but only from Ops involvement
+  parameters:
+    - name: orderId
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/order-cancel-request'
+  responses:
+    '200':
+      description: OK
+    '404':
+      description: Order could not be found

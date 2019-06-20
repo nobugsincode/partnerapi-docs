@@ -1,0 +1,24 @@
+put:
+  tags:
+  - order-acceptance-api
+  summary: "Reject order"
+  description: Call when an order has been rejected. An order can only be rejected if it hasn't previously been accepted, rejected, cancelled or ignored
+  parameters:
+    - name: orderId
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/order-reject-request'
+  responses:
+    '200':
+      description: OK
+    '404':
+      description: Order could not be found
+    '409':
+      description: Conflict. This order has either already been accepted, rejected or ignored by restaurant or cancelled by ops

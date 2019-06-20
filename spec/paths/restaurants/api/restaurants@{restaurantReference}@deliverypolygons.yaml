@@ -1,0 +1,25 @@
+post:
+  tags:
+    - restaurant-api
+  summary: Update delivery area
+  description: >-
+    Update the current delivery area for the restaurant by providing a KML file
+    describing the geographical polygon
+  operationId: UpdateDeliveryPolygons
+  parameters:
+    - name: restaurantReference
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    required: true
+    description: KML file describing the restauarant's delivery area
+    content:
+      application/vnd.google-earth.kml+xml:
+        schema:
+          type: string
+          format: binary
+  responses:
+    '201':
+      description: Created

@@ -1,0 +1,14 @@
+type: object
+properties:
+  FirstLine:
+    type: string
+  Postcode:
+    type: string
+  City:
+    type: string
+  Latitude:
+    format: double
+    type: integer
+  Longitude:
+    format: double
+    type: integer

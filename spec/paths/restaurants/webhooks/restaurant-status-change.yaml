@@ -1,0 +1,36 @@
+post:
+  tags:
+  - restaurant-webhooks
+  summary: Restaurant Status Change
+  description: ""
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            Event:
+              type: string
+              format: enum
+              enum: [RestaurantStatusChange]
+            RestaurantReference:
+              type: string
+              description: The JUST EAT Restaurant Id
+            Status:
+              type: string
+              format: enum
+              enum: [online, offline]
+            Message:
+              type: string
+              deprecated: true
+              description: This field should not be used but has been left in the callback for backwards compatability purposes
+        examples:
+          response:
+            value:
+              Event: RestaurantStatusChange
+              Status: online
+              RestaurantReference: 123abc
+  responses:
+    '200':
+      description: OK

@@ -1,0 +1,42 @@
+post:
+  tags:
+  - restaurant-webhooks
+  summary: Restaurant Details Updated
+  description: ""
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            event:
+              type: string
+              format: enum
+              enum: [RestaurantUpdated]
+            restaurants:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    format: integer
+                    description: The JUST EAT restaurant id
+                  name:
+                    type: string
+                  firstLine:
+                    type: string
+                  city:
+                    type: string
+                  postcode:
+                    type: string
+                  latitude:
+                    type: number
+                    format: float
+                  longitude:
+                    type: number
+                    format: float
+  responses:
+    '200':
+      description: OK

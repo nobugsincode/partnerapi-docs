@@ -1,0 +1,6 @@
+type: object
+properties:
+  Restaurants:
+    type: array
+    items:
+      "$ref": "#/definitions/search-restaurant"

@@ -1,0 +1,23 @@
+type: object
+properties:
+  DriverTipValue:
+    format: money
+    type: number
+  Total:
+    format: money
+    type: number
+  CashOnDelivery:
+    type: boolean
+  RestaurantTipValue:
+    format: money
+    type: number
+  DeliveryCharge:
+    format: money
+    type: number
+  CardCharges:
+    format: money
+    type: number
+  Fees:
+    type: array
+    items: 
+      "$ref": "#/definitions/fee"

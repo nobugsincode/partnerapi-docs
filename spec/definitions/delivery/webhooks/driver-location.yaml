@@ -1,0 +1,9 @@
+type: object
+properties:
+  TimeStamp: 
+    type: string
+    format: date-time
+  OrderId: 
+    type: string
+  Location: 
+    "$ref": "#/definitions/location-v2"

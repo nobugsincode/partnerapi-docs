@@ -1,0 +1,209 @@
+type: object
+properties:
+  PartnerOrderId: 
+    type: string
+  OrderReference: 
+    type: string
+  FriendlyOrderReference: 
+    type: string
+  Currency:
+    type: string
+  TotalPrice:
+    format: money
+    type: number
+  Fulfilment:
+    type: object
+    properties:
+      Method:
+        type: string
+        enum: ['Delivery', 'Collection']
+      CustomerDueDate: 
+        type: string
+        format: date-time
+      CustomerDueAsap:
+        type: boolean
+      PickupTime:
+        type: string
+        format: date-time
+      PrepareFor:
+        type: string
+        format: date-time
+      PreparationTime:
+        type: string
+        format: timespan
+      Address:
+        type: object
+        properties:
+          Lines:
+            type: array
+            items:
+              type: string
+          City: 
+            type: string
+          PostalCode: 
+            type: string
+          Geolocation:
+            "$ref": "#/definitions/location"
+      PhoneNumber: 
+        type: string
+  Payment:
+    type: object
+    properties:
+      Lines:
+        type: array
+        items:
+          type: object
+          properties:
+            Type: 
+              type: string
+              enum: ['card','cash','credit','other']
+            Value:
+              type: number
+              format: money
+            Paid: 
+              type: boolean
+  Customer:
+    type: object
+    properties:
+      Reference: 
+        type: string
+      Name: 
+        type: string
+  Items:
+    type: array
+    items:
+      "$ref": "#/definitions/item-v2"
+  PriceBreakdown:
+    type: object
+    properties:
+      Discount:
+        format: money
+        type: number
+      Tips:
+        format: money
+        type: number
+      Taxes:
+        format: money
+        type: number
+      Items:
+        format: money
+        type: number
+      Fees:
+        type: object
+        properties:
+          Delivery:
+            format: money
+            type: number
+          ServiceCharge:
+            format: money
+            type: number
+          Other:
+            format: money
+            type: number
+  NoteFromCustomer: 
+    type: string
+  PlacedDate: 
+    type: string
+    format: date-time
+  Restaurant:
+    type: object
+    properties:
+      Id: 
+        type: string
+      Reference: 
+        type: string
+      Name: 
+        type: string
+      Address:
+        type: object
+        properties:
+          Lines:
+            type: array
+            items:
+              type: string
+          City: 
+            type: string
+          PostalCode: 
+            type: string
+          Geolocation:
+            "$ref": "#/definitions/location"
+      PhoneNumber: 
+        type: string
+  IsTest: 
+    type: boolean
+example: 
+  PartnerOrderId: 'ABCD654321'
+  OrderReference: 'XYZ123456'
+  FriendlyOrderReference: 'REF0001'
+  Currency: 'GBP'
+  TotalPrice: 19.25
+  Fulfilment:
+    Method: 'Delivery'
+    CustomerDueDate: '2018-03-10T14:45:28Z'
+    CustomerDueAsap: false
+    PickupTime: '2018-03-10T15:10:18Z'
+    PrepareFor: '2018-03-10T15:09:00Z'
+    PreparationTime: '00:10:00'
+    Address:
+      Lines: ['Fleet Place House', 'Fleet Pl']
+      City: 'London'
+      PostalCode: 'EC4M 7RD'
+      Geolocation: 
+        Latitude: 51.51641
+        Longitude: -0.103198
+    PhoneNumber: '+441234567890'
+  Payment:
+    Lines: 
+      - Type: 'card'
+        Value: 19.25
+        Paid: false
+  Customer:
+    Reference: 'Batman'
+    Name: 'Bruce Wayne'
+  Items:
+    - Reference: '1234'
+      Description: 'Burger Meal'
+      Quantity: 2
+      UnitPrice: 5.00
+      TotalPrice: 10.00
+      Items:
+        - Reference: '9876'
+          Description: 'Fries'
+          Quantity: 1
+          UnitPrice: 0.00
+          Items: []
+        - Reference: '6789'
+          Description: 'Still Water'
+          Quantity: 2
+          UnitPrice: 0.00
+          Items: []
+    - Reference: '4321'
+      Description: 'Regular Burger'
+      Quantity: 1
+      UnitPrice: 7.25
+      TotalPrice: 7.25
+      Items: []
+  PriceBreakdown:
+    Discount: 0.00
+    Tips: 0.50
+    Taxes: 3.85
+    Items: 17.25
+    Fees:
+      Delivery: 1.00
+      ServiceCharge: 0.50
+      Other: 0.00
+  NoteFromCustomer: '5th floor, code 1234'
+  PlacedDate: '2018-03-10T14:45:28Z'
+  Restaurant:
+    Id: '99999'
+    Name: 'Just Eat Test Restaurant'
+    Address:
+      Lines: ['Oldridge Road']
+      City: 'London'
+      PostalCode: 'SW12 8PW'
+      Geolocation: 
+        Latitude: 51.4484
+        Longitude: -0.1504
+    PhoneNumber: '+441200000000'
+    Refererence: 'R99999'
+  IsTest: true

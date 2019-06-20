@@ -1,0 +1,15 @@
+type: object
+properties:
+  Reference:
+    type: string
+  Name:
+    type: string    
+  Quantity:
+    type: integer
+  UnitPrice:
+    format: money
+    type: integer
+  Items:
+    type: array
+    items: 
+      "$ref": "#/definitions/item-v2"

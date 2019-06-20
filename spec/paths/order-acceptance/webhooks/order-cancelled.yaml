@@ -1,0 +1,14 @@
+post:
+  tags:
+  - order-acceptance-webhooks
+  summary: Order cancelled
+  description: "This webhook will be invoked whenever the order was cancelled."
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          "$ref": "#/definitions/order-cancelled"
+  responses:
+    '200':
+      description: Respond with a 200 status code to indicate that you have received the notification.

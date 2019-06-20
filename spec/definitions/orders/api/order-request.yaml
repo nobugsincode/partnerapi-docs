@@ -1,0 +1,46 @@
+type: object
+properties:
+  OrderReference:
+    type: string
+  FriendlyOrderReference:
+    type: string
+  EventUpdateUri:
+    type: string
+  Fulfillment:
+    "$ref": "#/definitions/fulfillment"
+  RestaurantReference:
+    type: string
+  Payment:
+    "$ref": "#/definitions/payment"
+  Customer:
+    "$ref": "#/definitions/customer"
+  Basket:
+    type: string
+  CustomerNote:
+    type: string
+  PlacedDate:
+    type: string
+    format: date-time
+  DueDate:
+    type: string
+    format: date-time
+  TimeStampAccepted:
+    type: string
+    format: date-time
+  IsRds:
+    type: boolean
+  RestaurantDetails:
+    "$ref": "#/definitions/restaurant-details"
+  PartnerName:
+    type: string
+  PartnerSubscriptionId:
+    type: integer
+required:
+  - PlacedDate
+  - DueDate
+  - OrderReference
+  - Payment
+  - Customer
+  - Basket
+  - RestaurantDetails
+  - PartnerSubscriptionId

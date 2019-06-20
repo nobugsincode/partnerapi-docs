@@ -1,0 +1,7 @@
+type: object
+properties:
+  TimeAcceptedFor:
+    format: date-time
+    type: string
+example:
+  TimeAcceptedFor: '2018-03-10T14:45:28Z'

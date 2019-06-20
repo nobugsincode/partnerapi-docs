@@ -1,0 +1,193 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://{country}-partnerapi.just-eat.io'
+    description: live / production
+    variables:
+      country:
+        default: uk
+        enum:
+          - au
+          - ca
+          - dk
+          - es
+          - ie
+          - it
+          - nz
+          - uk
+  - url: 'https://staging-{country}-partnerapi.just-eat.io'
+    description: test / staging
+    variables:
+      country:
+        default: uk
+        enum:
+          - au
+          - ca
+          - dk
+          - es
+          - ie
+          - it
+          - nz
+          - uk
+externalDocs:
+  description: JUST EAT Developer Contextual Documentation
+  url: 'https://developers.justeat.com'
+info:
+  version: v1
+  title: JUST EAT Partner API Docs
+  x-logo:
+    url: >-
+      https://raw.githubusercontent.com/justeat/partnerapi-docs/master/web/logo-just-eat.png
+  description: >-
+    # Getting Started
+
+    ## Swagger UI
+
+    Our API docs are also available via swagger UI, see
+    https://justeat.github.io/partnerapi-docs/swagger-ui
+
+    ## Security
+
+    ### HTTPS
+
+    All api calls and callbacks require HTTPS. Your service will need a valid
+    SSL certificate and be accesible via the standard SSL port (port 443).
+
+    ## Making an API request
+
+    ```
+
+    PUT https://uk-partnerapi.just-eat.io/orders/abcd1234 HTTP/1.1
+
+    Host: uk-partnerapi.just-eat.io
+
+    Authorization: JE-API-KEY abcd123456789
+
+    Content-Length: 1000
+
+    Content-Type: application/json
+
+    ```
+
+    ## Date Formats
+
+    ### Date and time formats
+
+    All dates and times should use the [ISO 8601 standard for representation of
+    dates and times](https://en.wikipedia.org/wiki/ISO_8601).
+
+
+    Times recorded by Just Eat are either stored in:
+      * UTC time standard with no offset; OR
+      * Local time with an accompanying offset to UTC time
+
+    All properties ending with `WithUtcOffset` contain local time along with an
+    offset to UTC time.
+
+
+    #### For instance:
+
+    * DueDateWithUtcOffset: `"2015-05-26T14:52:35.5444292+01:00"`
+      - Local time: `14:52`
+      - UTC time: `13:52`
+      - UTC offset: `+1hr` (due to daylight time saving)
+    * DueDateWithUtcOffset: `"2015-02-03T11:10:00.0000000+00:00"`
+      - Local time: `11:10`
+      - UTC time: `11:10`
+      - UTC offset: `0` (no daylight time saving, local time is equivalent to UTC)
+
+    Note that the offset may be for a timezone different to your own, so you
+    should alway convert to your own local time for display purposes (e.g. on
+    receipts and terminals).
+
+
+    ### Callback timestamps
+
+    Ideally, timestamps sent to Just Eat should be recorded as the current local
+    time (including any changes needed to account for daylight saving) with an
+    accompanying offset that shows the difference between the recorded local
+    time and the current UTC time.  
+
+
+    If it is not possible to record timestamps in local time, timestamps may be
+    recorded in UTC time with a 00:00 offset.
+
+    ## Async Webhooks
+
+    Some of the webhooks on the platform are configured as being 'async'
+    webhooks. These are for long-running operations, and work as follows:
+      1. Your webhook is invoked with a `?callback={returnUrl}` query string parameter. The `returnUrl` is a unique URL that you will need to send the async response to.
+      2. Return an immediate `202 Accepted` response from the webhook endpoint, to indicate that you have received the request.
+      3. Perform the long-running operation. This can be deemed either a _success_; or a _failure_.
+      4. If the result is a _**success**_, return the following:
+      ```
+      POST {returnUrl} HTTP/1.1
+      
+      {
+            "status": "Success",
+            "message": "{successMessage}",
+            "data": {}   // webhook-specific response object
+      }
+      ```
+      5. Otherwise, if the result is a _**failure**_, return the following:
+      ```
+      POST {returnUrl} HTTP/1.1
+      
+      {
+            "status": "Failure",
+            "message": "{failureMessage}",
+            "data": {}   // webhook-specific response object
+      }
+      ```
+components:
+  securitySchemes:
+    API Key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >-
+        <p>All api calls require an Authorization Key which will be provided by
+        JUST EAT.<p><p>The key needs to be provided in the header as follows:
+        </p><p><b>Authorization: JE-API-KEY {Your-Key-Here}</b></p>The key is
+        case sensitive.
+security:
+  - API Key: []
+tags:
+  - name: restaurant-api
+    x-displayName: Restaurant API
+  - name: restaurant-webhooks
+    x-displayName: Restaurant Webhooks
+  - name: order-acceptance-api
+    x-displayName: Order Acceptance API
+  - name: order-acceptance-webhooks
+    x-displayName: Order Acceptance Webhooks
+  - name: order-api
+    x-displayName: Order API
+  - name: order-webhooks
+    x-displayName: Order Webhooks
+  - name: order-delivery-api
+    x-displayName: Order Delivery API
+  - name: order-delivery-webhooks
+    x-displayName: Order Delivery Webhooks
+  - name: delivery-pools-api
+    x-displayName: Delivery Pools API
+  - name: search-api
+    x-displayName: Search API
+x-tagGroups:
+  - name: Whitelabel
+    tags:
+      - search-api
+      - order-api
+      - order-webhooks
+      - order-acceptance-api
+      - order-acceptance-webhooks
+  - name: Delivery Pools
+    tags:
+      - delivery-pools-api
+  - name: Order Delivery
+    tags:
+      - order-delivery-api
+      - order-delivery-webhooks
+  - name: Restaurants
+    tags:
+      - restaurant-api
+      - restaurant-webhooks

@@ -1,0 +1,19 @@
+type: object
+properties:
+  Lines:
+    type: array
+    items: 
+      type: string
+  City:
+    type: string
+  PostalCode:
+    type: string
+  Geolocation:
+    type: object
+    properties:
+      Latitude:
+        format: double
+        type: number
+      Longitude:
+        format: double
+        type: number

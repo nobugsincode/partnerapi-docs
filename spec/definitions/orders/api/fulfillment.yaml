@@ -1,0 +1,9 @@
+type: object
+properties:
+  PickupTime:
+    type: string
+    format: date-time
+  Method:
+    type: string
+  Table:
+    type: string

@@ -1,0 +1,14 @@
+type: object
+properties:
+  Latitude:
+    format: double
+    type: number
+  Longitude:
+    format: double
+    type: number
+required:
+  - Latitude
+  - Longitude
+example:
+  Latitude: 51.51641
+  Longitude: -0.103198

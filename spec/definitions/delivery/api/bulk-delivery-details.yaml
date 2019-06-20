@@ -1,0 +1,17 @@
+type: object
+properties:
+  OrderId:
+    type: string
+  EtaAtDeliveryAddress:
+    descritpion: This should represent the delivery partner's best guess at when the driver will arrive at the delivery address.
+    format: date-time
+    type: string
+  EtaAtRestaurant:
+    descritpion: This should represent the delivery partner's best guess at when the driver will arrive at the restaurant.
+    format: date-time
+    type: string
+  Location:
+    "$ref": "#/definitions/location"
+  TimeStampWithUtcOffset:
+    format: date-time
+    type: string

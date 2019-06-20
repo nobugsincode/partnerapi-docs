@@ -1,0 +1,7 @@
+type: object
+properties:
+  Message:
+    descritpion: Reason why this order is being rejected.
+    type: string
+example:
+  Message: 'Kitchen overloaded'

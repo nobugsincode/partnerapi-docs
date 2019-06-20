@@ -1,0 +1,26 @@
+type: object
+properties:
+  DriverName:
+    type: string
+  DriverContactNumber:
+    type: string
+  VehicleDetails:
+    "$ref": "#/definitions/vehicle-details"
+  EstimatedArrivalTime:
+    descritpion: This should represent the delivery partner's best guess at when the driver will arrive at the restaurant. In other words, it should not just contain the pick-up time initially requested by Just Eat.
+    format: date-time
+    type: string
+    deprecated: true
+  EtaAtRestaurant:
+    descritpion: This should represent the delivery partner's best guess at when the driver will arrive at the restaurant. In other words, it should not just contain the pick-up time initially requested by Just Eat.
+    format: date-time
+    type: string
+  EtaAtDeliveryAddress:
+    descritpion: This should represent the delivery partner's best guess at when the driver will arrive at the delivery address.
+    format: date-time
+    type: string
+  Location:
+    "$ref": "#/definitions/location"
+  TimeStampWithUtcOffset:
+    format: date-time
+    type: string

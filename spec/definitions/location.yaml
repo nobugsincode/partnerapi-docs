@@ -1,0 +1,26 @@
+type: object
+properties:
+  Latitude:
+    format: double
+    type: number
+  Longitude:
+    format: double
+    type: number
+  Speed:
+    format: double
+    type: number
+  Heading:
+    format: double
+    type: number
+  Accuracy:
+    format: double
+    type: number
+required:
+  - Latitude
+  - Longitude
+example:
+  Latitude: 51.51641
+  Longitude: -0.103198
+  Speed: 8.68000
+  Heading: 357.10382
+  Accuracy: 12.81400

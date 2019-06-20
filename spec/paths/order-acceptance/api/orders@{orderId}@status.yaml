@@ -1,0 +1,24 @@
+put:
+  tags:
+  - order-acceptance-api
+  summary: "Set Order status"
+  parameters:
+    - name: orderId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: partnerId
+      in: query
+      required: true
+      schema:
+        type: integer
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/order-status-request'
+  responses:
+    '200':
+      description: OK

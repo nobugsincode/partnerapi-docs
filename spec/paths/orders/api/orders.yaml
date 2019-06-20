@@ -1,0 +1,33 @@
+post:
+  tags:
+  - order-api
+  summary: "Create order"
+  parameters:
+  - name: x-je-api-version
+    in: header
+    required: false
+    schema:
+      type: string
+      default: 1.0
+    example:
+      x-je-api-version: 2.0
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          "$ref": "#/definitions/order-request-v2"
+  responses:
+    '201':
+      description: Created
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              OrderId:
+                type: string
+    '409':
+      description: Conflict - you've already told us about an order with this OrderReference
+    '400':
+      description: Request has failed validation in some way - see response body for details

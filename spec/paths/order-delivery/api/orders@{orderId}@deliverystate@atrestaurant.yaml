@@ -1,0 +1,20 @@
+put:
+  tags:
+  - order-delivery-api
+  summary: Driver at restaurant
+  description: The _at restaurant_ callback should be sent when the driver arrives at the restaurant and is ready to collect the order.
+  parameters:
+    - name: orderId
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          "$ref": "#/definitions/delivery-driver-details-with-eta"
+  responses:
+    '200':
+      description: OK

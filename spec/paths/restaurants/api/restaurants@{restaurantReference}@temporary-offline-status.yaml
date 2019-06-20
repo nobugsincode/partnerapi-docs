@@ -1,0 +1,19 @@
+put:
+  tags:
+    - restaurant-api
+  operationId: UpdateRestaurantTemporaryOfflineStatus
+  parameters:
+    - name: restaurantReference
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          "$ref": "#/definitions/partner-restaurant-temporary-offline-status"
+  responses:
+    '200':
+      description: OK

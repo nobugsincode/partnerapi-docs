@@ -1,0 +1,28 @@
+type: object
+properties:
+  Status:
+    type: string
+    enum:
+     - InKitchen
+     - FailedToSendToKitchen
+     - Accepted
+     - Rejected
+    description: The requested new state of the order 
+  TimeStamp:
+    format: date-time
+    type: string
+  Message:
+    type: string
+  Data:
+    type: object
+    additionalProperties:
+      type: string
+  TimeAcceptedFor:
+    format: date-time
+    type: string
+required:
+  - Status
+  - TimeStamp
+example:
+  Status: Accepted
+  TimeStamp: '2018-03-10T14:45:28Z'

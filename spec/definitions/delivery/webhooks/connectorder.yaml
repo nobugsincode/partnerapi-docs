@@ -1,0 +1,367 @@
+type: object
+properties:
+  Id: 
+    type: string
+    description: Id is the unique ID that Just Eat has assigned to each order. Please use this ID whenever sending requests related to the order.
+  CustomerOrderId: 
+    format: int32
+    type: number
+    deprecated: true
+    description: This is a deprecated customer-facing ID that we maintain to support existing implementations.
+  FriendlyOrderReference: 
+    type: string
+    description:  This is the customer-facing ID for the order, which should be used in any UI or receipts to identify the order to the customer, driver or restaurant.
+  OrderReference: 
+    type: string
+    description: This field is used to store external references to the order.
+  IsAMiniFistPumpOrder:
+    type: boolean
+    deprecated: true
+    descrption: Legacy Promotion - Ignore.
+  Order:
+    type: object
+    properties:
+      NoteToRestaurant:
+        type: string 
+        descrption: Notes from the customer about their order. In addition to notes for the restaurant, this field can also delivery instructions - and should be displayed to the delivery driver.
+      ServiceType: 
+        type: string
+        enum: [Collection, Delivery]
+      PlacedDate: 
+        type: string
+        format: date-time
+        description: Date Customer placed the order. Note that JUST EAT accepts pre-orders therefore there may be a significant difference between Placed Date and Due Date This Date/Time is set as UTC without an offset, regardless of Country.
+      RdsPickupTimeWithUtcOffset:
+        type: string
+        format: date-time
+        description: When the Delivery Partner needs to be at the Restaurant to pickup the Order.
+      DueDate: 
+        type: string
+        format: date-time
+        deprecated: true
+        description: Ignore - use DueDateWithUtcOffset.
+      DueDateWithUtcOffset: 
+        type: string
+        format: date-time
+        description: The DateTime when the Customer has been told they will receive the Order.
+      InitialDueDate: 
+        type: string
+        format: date-time
+        deprecated: true
+        description: Ignore - use IntialDueDateWithUtcOffset.
+      InitialDueDateWithUtcOffset: 
+        type: string
+        format: date-time
+        description: When the Customer was originally told the order would be delivered (prior to Restaurant adjustment)
+      PickupNoticePeriod: 
+        type: string
+        format: timespan
+        description: Desired minimum amount of notice needed before the driver arrives to pickup the order at the restaurant. This is to allow restaurant enough time to prepare the order. If less notice is given the driver may have to wait for the order to be prepared. Field is in the format "hh:mm:ss"
+      PromptAsap: 
+        type: boolean
+        description: Did the Customer request the Order to ready ASAP
+  Restaurant:
+    type: object
+    properties:
+      Id: 
+        type: string
+        description: Unique ID of the Restaurant.
+      Name:
+        type: string
+        description: The name of the Restaurant.
+      PhoneNumber:
+        type: string
+        description: The Restaurant phone number.
+      AddressLines:
+        type: array
+        items:
+          type: string
+      City: 
+        type: string
+      Postcode: 
+        type: string
+      Longitude: 
+        type: number
+        format: double
+        description: Restaurant address longitude. Will be 0 if not provided.
+      Latitude: 
+        type: number
+        format: double
+        description: Restaurant address latitude. Will be 0 if not provided.
+      EmailAddress: 
+        type: string
+        description: Email address for the Restaurant.
+  Payment:
+    type: object
+    properties:
+      PaymentLines:
+        type: array
+        descrption:  How the Customer has paid for the Order.
+        items:
+          type: object
+          properties:
+            Type: 
+              type: string
+              description: How was the order Paid.
+              enum: [Card]
+            CardFee: 
+              type: number
+              format: double
+              description: Was there a fee for the payment mechanism.
+            Value: 
+              type: number
+              format: double
+              description: The value of the payment.
+      DriverTipValue: 
+        type: number
+        format: double
+        description: The value of the tip given to the Driver.
+      Total: 
+        type: number
+        format: double
+        description: The total order value.
+      TotalComplementary: 
+        type: number
+        format: double
+        description: Order amount covered by JUST EAT.
+      PaidDate: 
+        type: string
+        format: date-time
+        description: DateTime when the Order was Paid (excludes UTC offset).
+      CashOnDelivery: 
+        type: boolean
+        description: Is the Customer paying on Delivery.
+  Customer:
+    type: object
+    properties:
+      Id: 
+        type: string
+        description:  The JUST EAT Customer Id.
+      Email: 
+        type: string
+      Name: 
+        type: string
+      Address: 
+        type: string
+        description: Customer Address. Note that Address is comma delimited.
+      City: 
+        type: string
+      Postcode: 
+        type: string
+      Longitude: 
+        format: double
+        type: number
+      Latitude: 
+        format: double
+        type: number
+      PhoneNumber: 
+        type: string
+      TimeZone: 
+        type: string
+        description: Customer timezone, e.g. 'Central European Standard Time'.
+      PreviousRestuarantOrderCount: 
+        format: int32
+        type: number
+        description: The number of Orders the Customer has placed at this Restaurant via JUST EAT
+  Basket:
+    type: object
+    properties:
+      BasketId: 
+        type: string
+        description:  Unique Basket Id for the Order.
+      MenuId: 
+        type: number
+        format: int32
+      SubTotal: 
+        description: The Basket total cost, excluding any discounts.
+        type: number
+        format: double
+      ToSpend: 
+        type: number
+        format: double
+      MultiBuyDiscount: 
+        type: number
+        format: double
+      Discount: 
+        description: The discount amount, used in conjunction with DiscountType.
+        type: number
+        format: double
+      DeliveryCharge: 
+        type: number
+        format: double
+      Total: 
+        type: number
+        format: double
+      Discounts: 
+        description: Any Discounts applied to the Order see http://developers.just-eat.com/docs/mealdeal-with-accessories-and-discount.
+        type: array
+        items:
+          type: object
+          properties: 
+            Id : 
+              type: number
+              format: int32
+            Discount: 
+              description: The discount amount, used in conjunction with DiscountType.
+              type: number
+              format: int32
+            DiscountType: 
+              description: The type of discount, e.g. a percentage or the order or fixed amount.
+              type: string
+            QualifyingValue:
+              description: he minimum order amount in order for this discount to be applicable. 
+              type: number
+              format: double
+      GroupedBasketItems:
+        type: array
+        items:
+          description: An item in the Basket.
+          type: object
+          properties: 
+            CombinedPrice: 
+              description: The total price of the Basket Item (including discounts).
+              type: number
+              format: double
+            Quantity : 
+              description: The quanity of Basket Items requested.
+              type: number
+              format: int32
+            OrderSubId: 
+              type: number
+              format: int32
+            MenuCardNumber : 
+              type: string
+            BasketItem:
+              type: object
+              properties:
+                ProductId: 
+                  type: number
+                  format: int32
+                ProductTypeId: 
+                  type: number
+                  format: int32
+                MenuCardNumber: 
+                  type: string
+                Name: 
+                  description: The Item name, e.g. Chicken Tikka Masala or Family Meal Deal 3.
+                  type: string
+                Synonym: 
+                  description: Legacy - ignore.
+                  type: string
+                UnitPrice: 
+                  description:  The price of the item.
+                  type: number
+                  format: double
+                CombinedPrice: 
+                  description: Unit Price plus individual Meal Part item cost.
+                  type: number
+                  format: double
+                MealParts: 
+                  description: Represents sub-parts of a meal.
+                  type: array
+                  items:
+                    type: object
+                    properties: 
+                      MealPartId: 
+                        type: number
+                        format: int32
+                      GroupId: 
+                        type: number
+                        format: int32
+                      Name: 
+                        type: string
+                      Synonym: 
+                        type: string
+                      OptionalAccessories:
+                        type: array
+                        items:
+                          type: object
+                          properties: 
+                            OptionalAccessoryId: 
+                              type: number
+                              format: int32
+                            Quantity: 
+                              type: number
+                              format: int32
+                            UnitPrice: 
+                              type: number
+                              format: double
+                            Name: 
+                              type: string
+                      RequiredAccessories:
+                        type: array
+                        items:
+                          type: object
+                          properties: 
+                            RequiredAccessoryId : 
+                              type: number
+                              format: int32
+                            GroupId: 
+                              type: number
+                              format: int32
+                            UnitPrice: 
+                              type: number
+                              format: double
+                            Name: 
+                              type: string
+                OptionalAccessories:
+                  description: An option item added to the Basket Item, this may be options such as Garlic Bread or a bottle of Coke.
+                  type: array
+                  items:
+                    type: object
+                    properties: 
+                      OptionalAccessoryId: 
+                        type: number
+                        format: int32
+                      Quantity: 
+                        type: number
+                        format: int32
+                      UnitPrice: 
+                        type: number
+                        format: double
+                      Name: 
+                        type: string
+                RequiredAccessories:
+                  description: Items required as part of the Item, for example, Pizza base sauce.
+                  type: array
+                  items:
+                    type: object
+                    properties: 
+                      RequiredAccessoryId : 
+                        type: number
+                        format: int32
+                      GroupId: 
+                        type: number
+                        format: int32
+                      UnitPrice: 
+                        type: number
+                        format: double
+                      Name: 
+                        type: string
+                Discounts: 
+                  description: Any discounts applied to this specfic item.
+                  type: array
+                  items:
+                    type: object
+                    properties: 
+                      Amount: 
+                        type: number
+                        format: double
+                      DiscountType: 
+                        type: string
+                MultiBuyDiscounts: 
+                  description: Any multi-purchase discounts appled to this item.
+                  type: array
+                  items:
+                    type: object
+                    properties: 
+                      OrderItemId : 
+                        type: string
+                      Amount : 
+                        type: number
+                        format: double
+                      DiscountType: 
+                        type: string
+                      ProductTypeId : 
+                        type: number
+                        format: int32

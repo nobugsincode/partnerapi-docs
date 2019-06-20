@@ -1,0 +1,19 @@
+type: object
+properties:
+  Method:
+    type: string
+    enum:
+      - Delivery
+      - Collection
+  DueDate:
+    type: string
+    format: date-time
+    description: The time the customer expects the food. Time must be in the future
+  DueAsap:
+    type: boolean
+    description: If food should be delivered ASAP
+required:
+  - Method
+  - DueDate
+example:
+  Method: Delivery|Collection

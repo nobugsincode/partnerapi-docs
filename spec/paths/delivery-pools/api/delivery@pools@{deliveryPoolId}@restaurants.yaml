@@ -1,0 +1,67 @@
+parameters:
+- name: deliveryPoolId
+  in: path
+  required: true
+  description: Identifier for the pool	
+  schema:
+     type: string
+put:
+  tags:
+  - delivery-pools-api
+  summary: Add restaurants to an existing delivery pool
+  description: Add additional restaurants to a delivery pool
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              restaurants:
+                description: An array of JUST EAT restaurant ids served by the pool.  
+                type: array
+                items:
+                  type: number
+                  format: int32
+          examples:
+            response:
+              value:
+                restaurants:
+                - 123
+                - 456
+    '404':
+      description: The pool could not be found
+    '400':
+      description: There was something invalid in your request - check response body for details
+    '409':
+      description: The restaurants could not be added to the pool. Typically this is because they are already assigned to another pool
+delete:
+  tags:
+  - delivery-pools-api
+  summary: Remove restaurants from a delivery pool
+  description: Remove restaurants from a delivery pool
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            restaurants:
+              description: An array of JUST EAT restaurant ids served by the pool.  
+              type: array
+              items:
+                type: number
+                format: int32
+          example:
+            restaurants:
+            - 123
+            - 456
+  responses:
+    '200':
+      description: Pool has been updated
+    '400':
+      description: There was something invalid in your request - check response body for details
+    '404':
+      description: The pool could not be found

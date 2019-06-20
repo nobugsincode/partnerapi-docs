@@ -1,0 +1,20 @@
+put:
+  tags:
+  - order-delivery-api
+  summary: Driver assigned to order
+  description: The _driver assigned_ callback should be sent when a driver is assigned to the order. It should communicate important details about the driver - and also an ETAs that records when the driver expects to arrive at the restaurant and delivery address.
+  parameters:
+    - name: orderId
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          "$ref": "#/definitions/delivery-driver-assigned-details"
+  responses:
+    '200':
+      description: OK

@@ -1,0 +1,41 @@
+post:
+  tags:
+  - restaurant-webhooks
+  summary: Open Hours For Restaurant Changed
+  description: "The Open Hours for a Restaurant have been changed"
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            Event:
+              type: string
+              format: enum
+              enum: [OpenHoursForRestaurantChanged]
+            RestaurantReference:
+              type: string
+              description: The JUST EAT Restaurant Id
+            OpenHours:
+              type: array
+              items:
+                type: object
+                properties:
+                  DayOfWeek:
+                    type: string
+                    format: enum
+                    enum: [Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday]
+                    description: The day of the week the times are for.
+                  OpenTime:
+                    type: string
+                    description: The open time (HH:mm)
+                  CloseTime:
+                    type: string
+                    description: The close time (HH:mm) (Wide clock, ie, if before start it is following day)
+                  Closed:
+                    type: boolean
+                    description: The restaurant is closed for the day
+  responses:
+    '200':
+      description: OK

@@ -1,0 +1,13 @@
+type: object
+properties:
+  Status:
+    enum:
+    - TempOffline
+    - ClosedToday
+    - None
+    type: string
+  Message:
+    type: string
+example:
+  Status: TempOffline
+  Message: Too busy

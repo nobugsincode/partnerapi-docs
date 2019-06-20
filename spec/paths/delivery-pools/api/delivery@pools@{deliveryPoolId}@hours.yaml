@@ -1,0 +1,229 @@
+parameters:
+- name: deliveryPoolId
+  in: path
+  required: true
+  description: Identifier for the pool
+  schema:
+    type: string
+put:
+  tags:
+  - delivery-pools-api
+  summary: Set the delivery pools daily start and end times
+  description: Set the daily start and end times for a pool or set closed flag if the pool does not operate on that day. Start and end times for all days must be provided. Though the api accepts array of start and end times for each day, multiple start and end time for a day are not accepted. If the end time for a day is equal to or before start time, end time will be considered as time for the next day.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            monday:
+              type: object
+              properties:
+                closed:
+                  type: boolean
+                  description: true if the pool is closed for the day
+                poolTimes:
+                  type: array
+                  description: pool start and end times for the day
+                  items:
+                    type: object
+                    properties:
+                      startTime:
+                        type: string
+                        description: pool start time for Monday (HH:mm)
+                      endTime:
+                        type: string
+                        description: pool end time for Monday (HH:mm)
+                    required:
+                      - startTime
+                      - endTime
+              required:
+                - poolTimes
+            tuesday:
+              type: object
+              properties:
+                closed:
+                  type: boolean
+                  description: true if the pool is closed for the day
+                poolTimes:
+                  type: array
+                  description: pool start and end times for the day
+                  items:
+                    type: object
+                    properties:
+                      startTime:
+                        type: string
+                        description: pool start time for Tuesday (HH:mm)
+                      endTime:
+                        type: string
+                        description: pool end time for Tuesday (HH:mm)
+                    required:
+                      - startTime
+                      - endTime
+              required:
+                - poolTimes
+            wednesday:
+              type: object
+              properties:
+                closed:
+                  type: boolean
+                  description: true if the pool is closed for the day
+                poolTimes:
+                  type: array
+                  description: pool start and end times for the day
+                  items:
+                    type: object
+                    properties:
+                      startTime:
+                        type: string
+                        description: pool start time for Wednesday (HH:mm)
+                      endTime:
+                        type: string
+                        description: pool end time for Wednesday (HH:mm)
+                    required:
+                      - startTime
+                      - endTime
+              required:
+                - poolTimes
+            thursday:
+              type: object
+              properties:
+                closed:
+                  type: boolean
+                  description: true if the pool is closed for the day
+                poolTimes:
+                  type: array
+                  description: pool start and end times for the day
+                  items:
+                    type: object
+                    properties:
+                      startTime:
+                        type: string
+                        description: pool start time for Thursday (HH:mm)
+                      endTime:
+                        type: string
+                        description: pool end time for Thursday (HH:mm)
+                    required:
+                      - startTime
+                      - endTime
+              required:
+                - poolTimes
+            friday:
+              type: object
+              properties:
+                closed:
+                  type: boolean
+                  description: true if the pool is closed for the day
+                poolTimes:
+                  type: array
+                  description: pool start and end times for the day
+                  items:
+                    type: object
+                    properties:
+                      startTime:
+                        type: string
+                        description: pool start time for Friday (HH:mm)
+                      endTime:
+                        type: string
+                        description: pool end time for Friday (HH:mm)
+                    required:
+                      - startTime
+                      - endTime
+              required:
+                - poolTimes
+            saturday:
+              type: object
+              properties:
+                closed:
+                  type: boolean
+                  description: true if the pool is closed for the day
+                poolTimes:
+                  type: array
+                  description: pool start and end times for the day
+                  items:
+                    type: object
+                    properties:
+                      startTime:
+                        type: string
+                        description: pool start time for Saturday (HH:mm)
+                      endTime:
+                        type: string
+                        description: pool end time for Saturday (HH:mm)
+                    required:
+                      - startTime
+                      - endTime
+              required:
+                - poolTimes
+            sunday:
+              type: object
+              properties:
+                closed:
+                  type: boolean
+                  description: true if the pool is closed for the day
+                poolTimes:
+                  type: array
+                  description: pool start and end times for the day
+                  items:
+                    type: object
+                    properties:
+                      startTime:
+                        type: string
+                        description: pool start time for Sunday (HH:mm)
+                      endTime:
+                        type: string
+                        description: pool end time for Sunday (HH:mm)
+                    required:
+                      - startTime
+                      - endTime
+              required:
+                - poolTimes
+          required:
+            - monday
+            - tuesday
+            - wednesday
+            - thursday
+            - friday
+            - saturday
+            - sunday
+          example:
+              monday:
+                closed: false
+                poolTimes :
+                  - startTime: '09:00'
+                    endTime: '21:00'
+              tuesday:
+                closed: true
+                poolTimes :
+                  - startTime: '10:00'
+                    endTime: '19:00'
+              wednesday:
+                closed: false
+                poolTimes :
+                  - startTime: '08:00'
+                    endTime: '18:00'
+              thursday:
+                closed: false
+                poolTimes :
+                  - startTime: '12:00'
+                    endTime: '03:00'
+              friday:
+                closed: false
+                poolTimes :
+                  - startTime: '12:00'
+                    endTime: '01:00'
+              saturday:
+                closed: false
+                poolTimes :
+                  - startTime: '11:00'
+                    endTime: '23:00'
+              sunday:
+                closed: false
+                poolTimes :
+                  - startTime: '13:00'
+                    endTime: '19:00'
+  responses:
+    '200':
+      description: Pool hours have been updated
+    '404':
+      description: The pool could not be found

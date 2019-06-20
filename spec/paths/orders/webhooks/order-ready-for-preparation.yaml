@@ -1,0 +1,46 @@
+post:
+  tags:
+    - order-webhooks
+  summary: Order ready for preparation (async)
+  description: >
+    This webhook will be invoked when we have determined that an order is ready
+    for preparation. Upon receiving the request, the order should be sent to the
+    underlying POS / kitchen screen. This operation is asynchronous, and we
+    expect a response in two parts:
+      1. We expect an immediate `202` response from this webhook to denote that you have received the request;
+      2. Following that, we expect an [async callback](#section/Async-Webhooks) - indicating either success or failure of the operation. The body for the async callbacks are as below:
+      
+      **Success callback**
+      ```
+      {
+            "status": "Success",
+            "message": "Order successfully sent to POS",
+            "data": {}
+      }
+      ```
+      **Failure callback**
+      ```
+      {
+            "status": "Failure",
+            "message": "{errorMessage}",   // e.g. "The POS is currently in use"
+            "data": {}
+      }
+      ```
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '#/definitions/order-ready-for-preparation'
+  responses:
+    '202':
+      description: >-
+        Upon successful receipt of this event, a `202` status code should be
+        returned, indicating the request has been accepted. You should then
+        later respond with the result of processing this request, via the
+        [callback URL](#section/Async-Webhooks) endpoint.
+    '400':
+      description: >-
+        Should the initial validation of the order fail, return a `400` status
+        code. NOTE: In this instance we do not also expect a failure callback
+        via the async callback URL.

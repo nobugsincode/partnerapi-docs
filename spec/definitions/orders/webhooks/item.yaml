@@ -1,0 +1,15 @@
+type: object
+properties:
+  Reference: 
+    type: string
+  OptionReference:
+    type: string       
+  Description: 
+    type: string
+  Quantity: 
+    type: number
+    format: int32
+  Items: 
+    type: array
+    items:
+      "$ref": "#/definitions/item"

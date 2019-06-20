@@ -1,0 +1,11 @@
+oneOf:
+  - type: object
+    properties:
+      Id:
+        type: integer
+        description: Our restaurant ID
+  - type: object
+    properties:
+      Reference:
+        type: string
+        description: If we hold a mapping for your restaurant IDs to ours - use your ID here

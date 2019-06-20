@@ -1,0 +1,20 @@
+type: object
+properties:
+  TimeStamp: 
+    type: string
+    format: date-time
+  EstimatedPickupTime: 
+    type: string
+    format: date-time
+  EstimatedDeliveryTime: 
+    type: string
+    format: date-time
+  DriverName: 
+    type: string
+  DriverContactNumber: 
+    type: string
+  Event:
+    type: string
+    enum: [DriverAssigned, DriverAtRestaurant, OnItsWay, AtDeliveryAddress, Delivered]
+  OrderId: 
+    type: string

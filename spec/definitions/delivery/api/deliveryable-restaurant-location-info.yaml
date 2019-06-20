@@ -1,0 +1,12 @@
+type: object
+properties:
+  RestaurantReference:
+    type: string
+  RestaurantId:
+    type: string
+  Latitude:
+    format: double
+    type: number
+  Longitude:
+    format: double
+    type: number

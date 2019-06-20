@@ -1,0 +1,7 @@
+type: object
+properties:
+  Value:
+    format: money
+    type: number
+  Type:
+    type: string

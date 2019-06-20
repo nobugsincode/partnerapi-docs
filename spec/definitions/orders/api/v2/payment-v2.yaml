@@ -1,0 +1,38 @@
+type: object
+properties:
+  PaidDate:
+    type: string
+    format: date-time
+  Tips:
+    type: array
+    items: 
+      "$ref": "#/definitions/fee"
+  Fees:
+    type: array
+    items: 
+      "$ref": "#/definitions/fee"
+  Taxes:
+    type: array
+    items: 
+      "$ref": "#/definitions/tax-v2" 
+  Lines:
+    type: array
+    items: 
+      "$ref": "#/definitions/lines-v2"
+required:
+  - Lines
+example:
+  Lines:
+    type: card
+    value: 19.95
+    paid: true
+    lastCardDigits: 1234
+    ServiceFee: 0
+  Tips:
+    type: driver
+    value: 2.5
+  Fees:
+    - type: card
+      value: 0.25
+    - type: delivery
+      value: 3.5

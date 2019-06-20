@@ -1,0 +1,24 @@
+type: object
+properties:
+  Id:
+    type: integer
+  Email:
+    type: string
+  Name:
+    type: string
+  Address:
+    type: string
+  City:
+    type: string
+  Postcode:
+    type: string
+  PhoneNumber:
+    type: string
+  Location:
+    "$ref": "#/definitions/location"
+required:
+  - Id
+  - Email
+  - Name
+  - Address
+  - Location

@@ -1,0 +1,14 @@
+type: object
+properties:
+  Value:
+    format: money
+    type: number
+  Type:
+    type: string
+  Percentage:
+    format: double
+    type: integer
+required:
+  - Value
+  - Type
+  - Percentage

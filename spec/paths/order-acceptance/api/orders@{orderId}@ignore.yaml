@@ -1,0 +1,18 @@
+put:
+  tags:
+  - order-acceptance-api
+  summary: "Ignore order"
+  description: Call when an order has been ignored by restaurant. An order can only be ignored if it hasn't previously been accepted, rejected, cancelled or ignored
+  parameters:
+    - name: orderId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: OK
+    '404':
+      description: Order could not be found
+    '409':
+      description: Conflict. This order has either already been accepted, rejected or ignored by restaurant or cancelled by ops

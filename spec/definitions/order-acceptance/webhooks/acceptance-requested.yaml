@@ -1,0 +1,193 @@
+type: object
+properties:
+  OrderId:
+    type: string
+  FriendlyOrderReference:
+    type: string
+  Currency:
+    type: string
+  TotalPrice:
+    format: money
+    type: number
+  Fulfilment:
+    type: object
+    properties:
+      Method:
+        type: string
+        enum:
+          - Delivery
+          - Collection
+      PhoneNumber:
+        type: string
+      CustomerDueDate:
+        format: date-time
+        type: string
+      CustomerDueAsap:
+        type: boolean
+      PreparationTime:
+        format: timespan
+        type: string
+      Address:
+        $ref: '#/definitions/order-address'
+  Payment:
+    type: object
+    properties:
+      Lines:
+        type: array
+        items:
+          type: object
+          properties:
+            Type:
+              type: string
+            Value:
+              format: money
+              type: number
+            Paid:
+              type: boolean
+  Customer:
+    type: object
+    properties:
+      Id:
+        type: number
+        nullable: true
+      Name:
+        type: string
+  Items:
+    $ref: '#/definitions/order-item'
+  PriceBreakdown:
+    type: object
+    properties:
+      Discount:
+        format: money
+        type: number
+        nullable: true
+      Tips:
+        format: money
+        type: number
+        nullable: true
+      Taxes:
+        format: money
+        type: number
+        nullable: true
+      Items:
+        format: money
+        type: number
+        nullable: true
+      Fees:
+        type: object
+        properties:
+          Delivery:
+            format: money
+            type: number
+            nullable: true
+          ServiceCharge:
+            format: money
+            type: number
+            nullable: true
+          Other:
+            format: money
+            type: number
+            nullable: true
+  PlacedDate:
+    format: date-time
+    type: string
+  CustomerNotes: 
+    type: object
+    additionalProperties:
+      type: string
+  Restaurant:
+    type: object
+    properties:
+      Reference:
+        type: string
+      Name:
+        type: string
+      Address:
+        $ref: '#/definitions/order-address'
+      TimeZone:
+        type: string
+      PhoneNumber:
+        type: string
+  IsTest:
+    type: boolean
+example:
+  OrderId: 'ABCD654321'
+  FriendlyOrderReference: 'REF0001'
+  Currency: 'GBP'
+  TotalPrice: 19.25
+  Fulfilment:
+    Method: Delivery
+    PhoneNumber: '+441234567890'
+    CustomerDueDate: '2018-03-10T14:45:28Z'
+    CustomerDueAsap: false
+    Address:
+      Lines:
+        - 'Fleet Place House'
+        - 'Fleet Pl'
+      City: 'London'
+      PostalCode: 'EC4M 7RD'
+      Geolocation:
+        Latitude: 51.51641
+        Longitude: -0.103198
+    PreparationTime: '0:23:32'
+  Payment:
+    Lines:
+      - Type: 'AccountCredit'
+        Value: 19.25
+        Paid: false
+      - Type: 'CreditCard'
+        Value: 19.25
+        Paid: true
+  Customer:
+    Id: 12345
+    Name: 'Bruce Wayne'
+  Items:
+    - Reference: '1234'
+      Name: 'Chicken Wings'
+      Quantity: 2
+      UnitPrice: 5
+      TotalPrice: 10
+      Items:
+        - Reference: '9876'
+          Name: 'Hot sauce'
+          Quantity: 1
+          UnitPrice: 0
+          Items: []
+        - Reference: '6789'
+          Name: 'Salt'
+          Quantity: 2
+          UnitPrice: 0
+          Items: []
+    - Reference: '4321'
+      Name: 'Whole Chicken'
+      Quantity: 1
+      UnitPrice: 7.25
+      TotalPrice: 7.25
+      Items: []
+  PriceBreakdown:
+    Discount: 0
+    Tips: 0.5
+    Taxes: 3.85
+    Items: 17.25
+    Fees:
+      Delivery: 1
+      ServiceCharge: 0.5
+      Other: 0
+  PlacedDate: '2018-03-10T14:45:28Z'
+  CustomerNotes:
+    noteForRestaurant: 'restaurant note'
+    noteForDelivery: 'delivery note'
+  Restaurant:
+    Refererence: 'R99999'
+    Name: 'Just Eat Test Restaurant'
+    Address:
+      Lines:
+        - 'Oldridge Road'
+      City: 'London'
+      PostalCode: 'SW12 8PW'
+      Geolocation:
+        Latitude: 51.4484
+        Longitude: -0.1504
+    TimeZone: 'Australia/Sydney (IANA format)'
+    PhoneNumber: '+441200000000'
+  IsTest: true

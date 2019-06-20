@@ -1,0 +1,8 @@
+type: object
+properties:
+  DeliveryLocation:
+    "$ref": "#/definitions/location"
+  Restaurants:
+    type: array
+    items:
+      "$ref": "#/definitions/deliverable-restaurant"

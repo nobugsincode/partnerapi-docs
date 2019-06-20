@@ -1,0 +1,38 @@
+put:
+  tags:
+  - order-delivery-webhooks
+  summary: Order ready for pickup
+  description: <p>The "Ready for pickup" event lets the delivery partner know that the food has been cooked and is now ready for collection up from the restaurant.</p><p>__When this event is received, it is important that you let your driver know that the order should now be collected from inside the restaurant.__ For example, this driver notification could take the form of an in-app notification or an SMS message.</p><p>This communication is needed to support restaurants who are unable to accommodate drivers inside their premises, as it allows restaurants to notify drivers waiting outside that they should come inside to collect their order.</p><p>NB&semi; This event can be sent by the restaurant at any point after the order is accepted by the restaurant (for instance, this event may be sent before the driver has arrived at the restaurant).</p>
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties: 
+            Event:
+              type: string
+              enum: ["Ready for pickup"]
+            Timestamp:
+              type: string
+              format: date-time
+  responses:
+    '200':
+      description: Upon successful receipt of the event, delivery partners should return a 200 HTTP status code indicating acknowledgement of transmission.
+    default:
+      description: In the unlikely case of unknown errors, JUST EAT will log a raw response. If possible, the response should have the following format
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Timestamp:
+                type: string
+                format: date-time
+              Message:
+                type: string
+              Details:
+                type: string
+              OrderId:
+                type: string
+    

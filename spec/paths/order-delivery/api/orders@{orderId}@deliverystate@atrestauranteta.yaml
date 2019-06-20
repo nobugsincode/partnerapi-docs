@@ -1,0 +1,28 @@
+put:
+  tags:
+  - order-delivery-api
+  summary: "Driver at restaurant estimated time of arrival"
+  parameters:
+    - name: orderId
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            estimatedAt: 
+              description: This is the time at which you are doing the estimation
+              type: string
+              format: date-time
+            bestGuess:
+              description: This should represent the delivery partner's best guess at when the driver will arrive at the restaurant.
+              type: string
+              format: date-time
+  responses:
+    '200':
+      description: OK

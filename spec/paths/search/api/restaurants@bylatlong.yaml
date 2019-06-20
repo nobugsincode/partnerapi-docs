@@ -1,0 +1,25 @@
+get:
+  tags:
+  - search-api
+  summary: Search by Lat/Long
+  description: Search for white label restaurants based on latitude & longitude.
+  parameters:
+    - name: Latitude
+      in: query
+      required: true
+      schema:
+        type: number
+        format: double
+    - name: Longitude
+      in: query
+      required: true
+      schema:
+        type: number
+        format: double
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            "$ref": "#/definitions/search-restaurants"

@@ -1,0 +1,26 @@
+type: object
+properties:
+  TotalPrice:
+    format: money
+    type: number
+    description: Price of this item x quantity and all sub items
+  Reference:
+    type: string
+    description: The item's ID that you hold
+  Name:
+    type: string    
+  Quantity:
+    type: integer
+    minimum: 1
+  UnitPrice:
+    format: money
+    type: integer    
+  Items:
+    type: array
+    items: 
+      "$ref": "#/definitions/item-v2"  
+required:
+  - TotalPrice
+  - Reference
+  - Name
+  - Quantity

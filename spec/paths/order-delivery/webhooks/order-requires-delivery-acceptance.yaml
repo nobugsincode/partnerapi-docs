@@ -1,0 +1,35 @@
+put:
+  tags:
+  - order-delivery-webhooks
+  summary: Order requires delivery acceptance
+  description: This webhook will be invoked when we have determined that an order is required acceptance for delivery. Upon receiving the request, the order should be scheduled for pickup by a courier/driver. We expect an immediate `201` response from this webhook to denote that you have received the request.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            "$ref": "#/definitions/connectorder"
+  responses:
+    '201':
+      description: In the event of successful handling of the request, a 201 status code should be returned, indicating acknowledgement of transmission success.
+    default:
+      description: In the case that the order cannot be accepted, an appropriate HTTP status code, such as 400 (Bad request) or 500 (Internal server error) should be returned.  In addition to the HTTP status code, a specific reason code and explanatory message should be provided within the response body
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              errors: 
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code: 
+                      description: <p>Each code should be selected from the following list of valid reasons.</p><table><tr><th>code</th><th>explantation</th></tr><tr><td>outside_hours</td><td>Delivery partner is closed and not accepting requests.</td></tr><tr><td>too_busy</td><td>Delivery partner does not have enough capacity to accept this request.</td></tr><tr><td>too_far</td><td>The customer is too far away from the restaurant, either by time or distance.</td></tr><tr><td>not_supported</td><td>Delivery partner is currently unable to deliver to the customer's location.</td></tr><tr><td>bad_address</td><td>The order contains an address that could not be processed or understood.</td></tr><tr><td>bad_request</td><td>The order format is invalid or the order contains required data or information that cannot be processed.</td></tr><tr><td>restaurant_not_configured</td><td>Delivery partner is not configured to accept requests for given restaurant.</td></tr><tr><td>duplicate</td><td>The request has already been processed before.</td></tr><tr><td>other</td><td>Any validation failure or unexpected error not covered by the above codes.</td></tr></table>
+                      type: string
+                      enum: [outside_hours, too_busy, too_far, not_supported, bad_address, bad_request, restaurant_not_configured, duplicate, other]
+                    message: 
+                      description: <p>The accompanying message should, in each case, provide an explanation of the specific problem that was experienced.</p><br/><p>Please note that the accompanying explanatory text are part of the code is only intended as an explanation of each reason code - and should not be returned to us as the message.</p>
+                      type: string

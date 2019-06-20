@@ -1,0 +1,29 @@
+get:
+  tags:
+  - order-delivery-api
+  summary: Get deliverable restaurants
+  parameters:
+    - name: toLat
+      in: query
+      required: false
+      schema:
+        type: number
+        format: double
+    - name: toLon
+      in: query
+      required: false
+      schema:
+        type: number
+        format: double
+    - name: toPostcode
+      in: query
+      required: false
+      schema:
+        type: string
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            "$ref": "#/definitions/deliverable-restaurants"

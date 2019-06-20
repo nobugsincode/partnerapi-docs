@@ -1,0 +1,25 @@
+type: object
+properties:
+  EtaAtDeliveryAddress:
+    descritpion: This should represent the delivery partner's best guess at when the driver will arrive at the delivery address.
+    format: date-time
+    type: string
+  EtaAtRestaurant:
+    descritpion: This should represent the delivery partner's best guess at when the driver will arrive at the restaurant.
+    format: date-time
+    type: string
+  Location:
+    "$ref": "#/definitions/location"
+  TimeStampWithUtcOffset:
+    format: date-time
+    type: string
+example:
+  EtaAtDeliveryAddress: '2018-03-10T15:45:28.7537228+00:00'
+  EtaAtRestaurant: '2018-03-10T15:25:28.7537228+00:00'
+  Location: 
+    Latitude: 51.51641
+    Longitude: -0.103198
+    Speed: 8.68000
+    Heading: 357.10382
+    Accuracy: 12.81400
+  TimeStampWithUtcOffset: '2018-03-10T14:45:28.7537228+00:00'

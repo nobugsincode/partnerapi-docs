@@ -1,0 +1,18 @@
+type: array
+items:
+  type: object
+  properties:
+    Reference:
+      type: string
+    Name:
+      type: string
+    Quantity:
+      type: number
+    UnitPrice:
+      format: money
+      type: number
+    TotalPrice:
+      format: money
+      type: number
+    Items:
+      "$ref": "#/definitions/order-item"

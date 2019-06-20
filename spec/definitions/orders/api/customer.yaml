@@ -1,0 +1,14 @@
+type: object
+properties:
+  CustomerReference:
+    type: string
+  Email:
+    type: string
+  Name:
+    type: string
+  Address:
+    "$ref": "#/definitions/address"
+  PhoneNumber:
+    type: string
+  Location:
+    "$ref": "#/definitions/location"

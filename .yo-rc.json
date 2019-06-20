@@ -1,0 +1,11 @@
+{
+  "generator-openapi-repo": {
+    "importExistingSpec": true,
+    "importedSpec": "swagger.yml",
+    "name": "partner",
+    "repo": "justeat/partnerapi-docs",
+    "splitSpec": true,
+    "samples": true,
+    "installSwaggerUI": false
+  }
+}

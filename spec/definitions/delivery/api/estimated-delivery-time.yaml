@@ -1,0 +1,6 @@
+type: object
+properties:
+  RestaurantReference:
+    type: string
+  DurationInMinutes:
+    type: string

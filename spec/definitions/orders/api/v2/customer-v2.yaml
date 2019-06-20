@@ -1,0 +1,18 @@
+type: object
+properties:
+  Name:
+    type: string
+  Email:
+    type: string
+  PhoneNumber:
+    type: string
+    description: The customer's real phone number
+  DisplayPhoneNumber:
+    type: string
+    description: If you implement phone masking provide a masked number here
+  Address:
+    "$ref": "#/definitions/address-v2"
+required:
+- Name
+- PhoneNumber
+- Address

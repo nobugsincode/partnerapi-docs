@@ -1,0 +1,21 @@
+type: object
+properties:
+  Id:
+    format: double
+    type: number
+  Name:
+    type: string
+  UniqueName:
+    type: string
+  Address:
+      "$ref": "#/definitions/search-address"
+  Url:
+    type: string
+  IsOpenNowForDelivery:
+    type: bool
+  DriveDistance:
+    format: double
+    type: number
+  DriveInfoCalculated:
+    type: bool    
+    

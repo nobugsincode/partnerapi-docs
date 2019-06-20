@@ -1,0 +1,9 @@
+type: object
+properties:
+  OrderId:
+    type: string
+  Event: 
+    type: string
+example:
+  OrderId: '123456'
+  Event: 'OrderCancelled'

@@ -1,0 +1,17 @@
+type: object
+properties:
+  AddressLines:
+    type: array
+    items: 
+      type: string
+  City:
+    type: string
+  PostalCode:
+    type: string
+  GeoLocation:
+    "$ref": "#/definitions/location-v2"
+required:
+- AddressLines
+- City
+- PostalCode
+- Geolocation

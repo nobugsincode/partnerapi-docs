@@ -1,0 +1,19 @@
+get:
+  tags:
+  - search-api
+  summary: Search by Postcode
+  description: Search for white label restaurants based on Postcode.
+  parameters:
+
+    - name: byPostcode
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            "$ref": "#/definitions/search-restaurants"

@@ -1,0 +1,14 @@
+post:
+  tags:
+  - order-webhooks
+  summary: Send to POS failed
+  description: "This webhook will be invoked if we experience an error or timeout in sending an order to the underlying POS / kitchen screen. When notified via this webhook, typically you will perfom some form of alerting or backup flow (e.g. ask the operator to enter the order manually into the POS). NOTE: This message contains the `OrderId`, but not the full order. It is assumed that you have stored/cached the full order details earlier in the flow - e.g. via the [/order-ready-for-preparation](#/paths/~1order-ready-for-preparation/post) webhook."
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          "$ref": "#/definitions/send-to-pos-failed"
+  responses:
+    '200':
+      description: Respond with a 200 status code to indicate that you have received the notification.
