@@ -34,3 +34,6 @@ node_modules
 
 # Visual Studio files
 .vs/
+
+# IntelliJ IDEA
+.idea/

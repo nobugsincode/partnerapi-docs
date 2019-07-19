@@ -1,10 +1,6 @@
 type: object
 properties:
-  PartnerOrderId: 
-    type: string
-  OrderReference: 
-    type: string
-  FriendlyOrderReference: 
+  OrderId:
     type: string
   Currency:
     type: string
@@ -22,9 +18,6 @@ properties:
         format: date-time
       CustomerDueAsap:
         type: boolean
-      PickupTime:
-        type: string
-        format: date-time
       PrepareFor:
         type: string
         format: date-time
@@ -65,7 +58,7 @@ properties:
   Customer:
     type: object
     properties:
-      Reference: 
+      Id:
         type: string
       Name: 
         type: string
@@ -100,8 +93,10 @@ properties:
           Other:
             format: money
             type: number
-  NoteFromCustomer: 
-    type: string
+  CustomerNotes:
+    type: object
+    additionalProperties:
+      type: string
   PlacedDate: 
     type: string
     format: date-time
@@ -132,18 +127,13 @@ properties:
   IsTest: 
     type: boolean
 example: 
-  PartnerOrderId: 'ABCD654321'
-  OrderReference: 'XYZ123456'
-  FriendlyOrderReference: 'REF0001'
+  OrderId: 'XYZ123456'
   Currency: 'GBP'
   TotalPrice: 19.25
   Fulfilment:
     Method: 'Delivery'
     CustomerDueDate: '2018-03-10T14:45:28Z'
     CustomerDueAsap: false
-    PickupTime: '2018-03-10T15:10:18Z'
-    PrepareFor: '2018-03-10T15:09:00Z'
-    PreparationTime: '00:10:00'
     Address:
       Lines: ['Fleet Place House', 'Fleet Pl']
       City: 'London'
@@ -158,11 +148,10 @@ example:
         Value: 19.25
         Paid: false
   Customer:
-    Reference: 'Batman'
+    Id: 'Batman'
     Name: 'Bruce Wayne'
   Items:
     - Reference: '1234'
-      Description: 'Burger Meal'
       Quantity: 2
       UnitPrice: 5.00
       TotalPrice: 10.00
@@ -192,7 +181,11 @@ example:
       Delivery: 1.00
       ServiceCharge: 0.50
       Other: 0.00
-  NoteFromCustomer: '5th floor, code 1234'
+  CustomerNotes:
+    - Key: 'Floor'
+      Value: '5th floor'
+    - Key: 'Code'
+      Value: 'Code 1234'
   PlacedDate: '2018-03-10T14:45:28Z'
   Restaurant:
     Id: '99999'
